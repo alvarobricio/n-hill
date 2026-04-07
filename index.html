@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Notting Hill Hopps ✈️</title>
+
+<style>
+body { font-family: Arial; background-color: #0f2e23; margin: 0; color: white; }
+
+header {
+    background: #1e4d3a;
+    padding: 15px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+header button {
+    position:absolute;
+    right:20px;
+    top:15px;
+    padding:8px 12px;
+    background:#d4af37;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.search-box {
+    background: white;
+    color: black;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 900px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search-box input, .search-box select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-box button {
+    background: #d4af37;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.trip {
+    background: #1e4d3a;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: 0.2s;
+    text-align:center;
+}
+
+.trip:hover {
+    transform: scale(1.03);
+}
+
+.price {
+    color: #d4af37;
+    font-weight: bold;
+}
+
+button.book {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    background: #d4af37;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#checkout {
+    display: none;
+    background: white;
+    color: black;
+    margin: 30px auto;
+    padding: 20px;
+    width: 400px;
+    border-radius: 10px;
+}
+
+#errorMsg {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#finalMessage {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #1e4d3a;
+}
+
+#comingSoonBox {
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    background:white;
+    color:black;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    text-align:center;
+    z-index:1000;
+}
+
+footer {
+    background: #1e4d3a;
+    padding: 20px;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <button onclick="showComingSoon()">Sign in</button>
+    <h1>Notting Hill Hopps</h1>
+    <p style="margin:0; font-style:italic;">Travel Different</p>
+</header>
+
+<div class="search-box">
+    <input id="searchInput" placeholder="Search destinations (e.g. Tokyo, New York...)">
+
+    <div>
+        <label>Departure</label><br>
+        <input id="startDate" type="date">
+    </div>
+
+    <div>
+        <label>Return</label><br>
+        <input id="endDate" type="date">
+    </div>
+
+    <select id="adults">
+        <option>1 adult</option>
+        <option>2 adults</option>
+        <option>3 adults</option>
+    </select>
+
+    <select id="children">
+        <option>0 children</option>
+        <option>1 child</option>
+        <option>2 children</option>
+        <option>3 children</option>
+    </select>
+
+    <button onclick="searchTrips()">Search</button>
+</div>
+
+<h2 style="text-align:center; margin-top:20px;">Available Destinations</h2>
+
+<div class="container">
+<div class="trip" data-price="2200"><h3>Tokyo 🇯🇵</h3><p class="price">€2200 per adult</p><p class="price">€1100 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
+<div class="trip" data-price="1800"><h3>New York 🇺🇸</h3><p class="price">€1800 per adult</p><p class="price">€900 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
+<div class="trip" data-price="2600"><h3>Sydney 🇦🇺</h3><p class="price">€2600 per adult</p><p class="price">€1300 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
+<div class="trip" data-price="1500"><h3>Dubai 🇦🇪</h3><p class="price">€1500 per adult</p><p class="price">€750 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
+<div class="trip" data-price="950"><h3>Paris 🇫🇷</h3><p class="price">€950 per adult</p><p class="price">€475 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
+<div class="trip" data-price="1100"><h3>Rome 🇮🇹</h3><p class="price">€1100 per adult</p><p class="price">€550 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
+<div class="trip" data-price="2100"><h3>Singapore 🇸🇬</h3><p class="price">€2100 per adult</p><p class="price">€1050 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
+<div class="trip" data-price="1700"><h3>Los Angeles 🇺🇸</h3><p class="price">€1700 per adult</p><p class="price">€850 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
+<div class="trip" data-price="2000"><h3>Hong Kong 🇭🇰</h3><p class="price">€2000 per adult</p><p class="price">€1000 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
+</div>
+
+<div id="checkout">
+    <h2>Checkout</h2>
+    <p id="selectedTrip"></p>
+    <p id="tripDetails"></p>
+    <p id="errorMsg"></p>
+
+    <input type="text" placeholder="Full Name"><br><br>
+    <input type="email" placeholder="Email"><br><br>
+
+    <button onclick="completeBooking()">Complete Booking</button>
+    <p id="finalMessage"></p>
+</div>
+
+<div id="comingSoonBox">
+    <h2>🚧 Coming Soon</h2>
+    <p>Sign in is not available yet.</p>
+    <button onclick="closeComingSoon()">Close</button>
+</div>
+
+<footer>
+    <p>📍 30 St Mary Axe (The Gherkin), London</p>
+    <p>📧 hello@n-hill.co.uk</p>
+    <p>📞 0800 123 4567</p>
+    <p>👨‍💻 Made by Alvaro Bricio</p>
+</footer>
+
+<script>
+function bookTrip(button) {
+    const tripDiv = button.parentElement;
+    const destination = tripDiv.querySelector('h3').innerText;
+    const adultPrice = parseFloat(tripDiv.dataset.price);
+    const childPrice = adultPrice / 2;
+
+    const start = document.getElementById("startDate").value;
+    const end = document.getElementById("endDate").value;
+    const adults = parseInt(document.getElementById("adults").value);
+    const children = parseInt(document.getElementById("children").value);
+
+    const minDate = new Date("2026-04-01");
+    const maxDate = new Date("2028-12-31");
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    // Validar fechas
+    if (!start || !end) {
+        document.getElementById("errorMsg").innerText = "Please select both departure and return dates.";
+        document.getElementById("checkout").style.display = "none";
+        return;
+    }
+
+    if (startDate < minDate || endDate < minDate || startDate > maxDate || endDate > maxDate) {
+        document.getElementById("errorMsg").innerText = "Error: Dates must be from April 2026 to December 2028.";
+        document.getElementById("checkout").style.display = "none";
+        return;
+    }
+
+    document.getElementById("errorMsg").innerText = "";
+
+    document.getElementById("checkout").style.display = "block";
+    document.getElementById("selectedTrip").innerText = "Trip: " + destination;
+
+    document.getElementById("tripDetails").innerText =
+        `Dates: ${start} → ${end} | ${adults} adult(s) x €${adultPrice} = €${adults*adultPrice}, ${children} child(ren) x €${childPrice} = €${children*childPrice}`;
+
+    document.getElementById("checkout").scrollIntoView({behavior:"smooth"});
+}
+
+function searchTrips() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const trips = document.querySelectorAll(".container .trip");
+
+    trips.forEach(t => {
+        if (input === "" || t.innerText.toLowerCase().includes(input)) {
+            t.style.display = "block";
+        } else {
+            t.style.display = "none";
+        }
+    });
+}
+
+function completeBooking() {
+    const messages = [
+        "It's not true, bro 😎",
+        "Fake booking completed 😂",
+        "No money taken 💸",
+        "You got baited 😏"
+    ];
+    document.getElementById("finalMessage").innerText =
+        messages[Math.floor(Math.random()*messages.length)];
+}
+
+function showComingSoon() {
+    document.getElementById("comingSoonBox").style.display = "block";
+}
+
+function closeComingSoon() {
+    document.getElementById("comingSoonBox").style.display = "none";
+}
+</script>
+
+</body>
+</html>
