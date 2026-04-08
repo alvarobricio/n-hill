@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Notting Hill Hopps ✈️</title>
-
+<title>Notting Hill Hopps 🇬🇧</title>
 <style>
-body { font-family: Arial; background-color: #0f2e23; margin: 0; color: white; }
-
+body {
+    font-family: Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji", "Noto Color Emoji";
+    background-color: #0f2e23;
+    margin: 0;
+    color: white;
+}
 header {
     background: #1e4d3a;
     padding: 15px 30px;
@@ -15,38 +18,96 @@ header {
     align-items: center;
     position: relative;
 }
-
 header button {
-    position:absolute;
-    right:20px;
-    top:15px;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    padding: 8px 12px;
+    background: #d4af37;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+header h1 {
+    margin: 0;
+}
+header p {
+    margin: 5px 0 0 0;
+    font-style: italic;
+    color: #d4af37;
+}
+
+
+
+
+nav {
+    background:#1e4d3a;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    padding:10px;
+}
+nav button {
     padding:8px 12px;
     background:#d4af37;
     border:none;
     border-radius:5px;
     cursor:pointer;
+    font-weight:bold;
 }
-
-.search-box {
-    background: white;
-    color: black;
-    padding: 15px;
-    border-radius: 10px;
-    margin: 20px auto;
-    width: 80%;
-    max-width: 900px;
-    display: flex;
-    gap: 10px;
+section {
+    display:none;
+    padding:20px;
+    text-align:center;
+}
+#home {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+    flex-wrap:wrap;
+    text-align:left;
+}
+#home .home-text {
+    flex:1 1 320px;
+    max-width:600px;
+    margin-left:20px;
+}
+#home img {
+    flex:1 1 320px;
+    max-width:420px;
+    width:100%;
+    height:auto;
+    border-radius:10px;
+}
+@media (max-width:900px) {
+    #home {
+        flex-direction:column;
+        text-align:center;
+    }
+    #home .home-text {
+        text-align:center;
+    }
+}
+.active-section {
+    display:block;
+}
+.search-filters {
+    display:flex;
+    justify-content:center;
     flex-wrap: wrap;
+    gap:10px;
+    margin: 20px auto;
+    max-width: 900px;
 }
-
-.search-box input, .search-box select {
+.search-filters select,
+.search-filters input {
     padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 5px;
+    border: 1px solid #ccc;
 }
-
-.search-box button {
+.search-filters button {
     background: #d4af37;
     border: none;
     padding: 10px 20px;
@@ -55,31 +116,32 @@ header button {
     font-weight: bold;
 }
 
+
+
+
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
 }
-
 .trip {
     background: #1e4d3a;
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    transition: 0.2s;
-    text-align:center;
+    text-align: center;
 }
-
-.trip:hover {
-    transform: scale(1.03);
-}
-
 .price {
     color: #d4af37;
     font-weight: bold;
 }
-
+.description {
+    font-size: 0.9em;
+    margin-top: 5px;
+    font-style: italic;
+    color: #ccc;
+}
 button.book {
     margin-top: 10px;
     width: 100%;
@@ -89,7 +151,6 @@ button.book {
     border-radius: 5px;
     cursor: pointer;
 }
-
 #checkout {
     display: none;
     background: white;
@@ -98,193 +159,641 @@ button.book {
     padding: 20px;
     width: 400px;
     border-radius: 10px;
+    text-align: center;
+    position: relative;
 }
-
-#errorMsg {
-    color: red;
+#scheduleBox {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    color: black;
+    padding: 30px;
+    width: 360px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+#checkout label {
     font-weight: bold;
-    margin-top: 10px;
 }
-
-#finalMessage {
-    margin-top: 15px;
+#adultPrice, #childPrice, #totalPrice {
+    font-size: 1.2em;
     font-weight: bold;
-    color: #1e4d3a;
+    margin-top: 5px;
+    color: black;
 }
-
+#totalPrice {
+    font-size: 1.5em;
+    color: #d4af37;
+}
 #comingSoonBox {
-    display:none;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    background:white;
-    color:black;
-    padding:30px;
-    border-radius:10px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.5);
-    text-align:center;
-    z-index:1000;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    color: black;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
-
 footer {
     background: #1e4d3a;
     padding: 20px;
     text-align: center;
 }
+.team-member {
+    margin: 15px 0;
+    padding: 10px;
+    background:#1e4d3a;
+    border-radius:5px;
+    text-align:left;
+}
 </style>
 </head>
-
 <body>
 
+
+
+
 <header>
-    <button onclick="showComingSoon()">Sign in</button>
-    <h1>Notting Hill Hopps</h1>
-    <p style="margin:0; font-style:italic;">Travel Different</p>
+    <button onclick="showComingSoon()">Log In</button>
+    <img src="Logo.png" alt="Notting Hill Hopps Logo" style="width:350px; height:auto; margin-bottom:10px;">
+    <h1>Notting Hill Hopps 🇬🇧</h1>
+    <p>The best London activities guaranteed!</p>
 </header>
 
-<div class="search-box">
-    <input id="searchInput" placeholder="Search destinations (e.g. Tokyo, New York...)">
 
-    <div>
-        <label>Departure</label><br>
-        <input id="startDate" type="date">
+
+
+<nav>
+    <button onclick="showSection('home')">Home</button>
+    <button onclick="showSection('about')">About Us</button>
+    <button onclick="showSection('activities')">Activities</button>
+    <button onclick="showSection('team')">Meet our Team</button>
+    <button onclick="showSection('contact')">Contact Us</button>
+</nav>
+
+
+
+
+<section id="home" class="active-section">
+    <div class="home-text">
+        <h2>Welcome to Notting Hill Hopps!</h2>
+        <p>Your ultimate guide to exploring London’s best activities and attractions.</p>
+        <p>Discover London’s most exciting activities, tours, and hidden gems—all in one place!</p>
+        <ul>
+            <li>Guided walking tours</li>
+            <li>Hidden street art spots</li>
+            <li>Unique London experiences</li>
+        </ul>
+        <p>Plan your perfect day in London with our curated recommendations!</p>
+        <button onclick="showSection('activities')" style="padding:10px 20px; background:#d4af37; border:none; border-radius:5px; cursor:pointer; font-weight:bold; margin-top:20px;">Explore Activities</button>
+    </div>
+    <img src="Home Page.png" alt="Notting Hill Hopps Home" />
+</section>
+
+
+
+
+<section id="about">
+    <h2>About Us</h2>
+    <p>We curate the finest experiences in London for tourists and locals alike. Our goal is to make every visit memorable and fun!</p>
+
+
+
+
+    <hr style="margin:20px 0; border-color:#d4af37;">
+
+
+
+
+    <h3>Our History</h3>
+    <p>Founded in 2018, Notting Hill Hopps started as a small guided tour company with just two passionate locals. Over the years, we expanded our team and tours, bringing unique experiences to tourists from all over the world.</p>
+    <ul style="text-align:left; max-width:700px; margin:auto;">
+        <li><strong>2018:</strong> Company founded by Álvaro and David</li>
+        <li><strong>2019:</strong> First guided walking tours launched</li>
+        <li><strong>2020:</strong> Expanded to private bike and food tours</li>
+        <li><strong>2022:</strong> Introduced virtual booking system and online reviews</li>
+    </ul>
+
+
+
+
+    <hr style="margin:20px 0; border-color:#d4af37;">
+
+
+
+
+    <h3>Why Choose Us</h3>
+    <ul style="text-align:left; max-width:700px; margin:auto;">
+        <li>Experienced local guides who know London inside out</li>
+        <li>Flexible booking times and group options</li>
+        <li>Friendly and safe tours for families and solo travelers</li>
+        <li>Fun, interactive experiences that go beyond typical sightseeing</li>
+    </ul>
+
+
+
+
+    <hr style="margin:20px 0; border-color:#d4af37;">
+
+
+
+
+    <h3>Reviews</h3>
+    <div style="text-align:left; max-width:700px; margin:auto; background:#1e4d3a; padding:15px; border-radius:10px;">
+        <p><strong>⭐⭐⭐⭐⭐ Alice M.</strong> "Absolutely loved the Camden Food Tour! The guides were friendly and the food was amazing. Highly recommend!"</p>
+        <p><strong>⭐⭐⭐⭐ John P.</strong> "London Eye Experience was breathtaking. The booking process was smooth and easy."</p>
+        <p><strong>⭐⭐⭐⭐⭐ Sarah K.</strong> "West End Theatre Show was magical. Perfect for a family outing."</p>
+        <p><strong>⭐⭐⭐ Tom L.</strong> "Tower of London tour was informative, but a bit crowded."</p>
+        <p><strong>⭐⭐⭐⭐ Emma W.</strong> "Harry Potter Studio Tour exceeded expectations! A must-do for fans."</p>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<section id="activities">
+    <div class="search-filters">
+        <input id="searchInput" placeholder="Search activities">
+        <select id="adults">
+            <option value="1">1 adult</option>
+            <option value="2">2 adults</option>
+            <option value="3">3 adults</option>
+        </select>
+        <select id="children">
+            <option value="0">0 children</option>
+            <option value="1">1 child</option>
+            <option value="2">2 children</option>
+        </select>
+        <button onclick="searchTrips()">Search</button>
     </div>
 
-    <div>
-        <label>Return</label><br>
-        <input id="endDate" type="date">
+
+
+
+    <h2 style="text-align:center;">Available Activities</h2>
+    <p style="text-align:center; color:#d4af37; font-weight:bold; margin-top:5px;">All times are shown in GMT timezone. <br>Note: West End (English only)</p>
+    <div class="container">
+        <div class="trip" data-adult="30" data-child="20">
+            <img src="London Eye.png" alt="London Eye Experience" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>London Eye Experience</h3>
+            <p class="price">£30 adult</p><p class="price">£20 child</p>
+            <p class="description">Enjoy stunning panoramic views of London from the iconic Ferris wheel.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="25" data-child="15">
+            <img src="Thames Cruise.png" alt="Thames River Cruise" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>Thames River Cruise</h3>
+            <p class="price">£25 adult</p><p class="price">£15 child</p>
+            <p class="description">Relax on a scenic cruise along the Thames and see landmarks like Tower Bridge.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="20" data-child="10">
+            <img src="British Museum.png" alt="British Museum Tour" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>British Museum Tour</h3>
+            <p class="price">£20 adult</p><p class="price">£10 child</p>
+            <p class="description">Discover history and culture with a guided tour through the British Museum.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="35" data-child="25">
+            <img src="Buckingham.png" alt="Buckingham Palace Tour" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>Buckingham Palace Tour</h3>
+            <p class="price">£35 adult</p><p class="price">£25 child</p>
+            <p class="description">Explore the official residence of the British monarch and learn about royal history.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="40" data-child="30">
+            <img src="Tower of London.png" alt="Tower of London Tour" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>Tower of London Tour</h3>
+            <p class="price">£40 adult</p><p class="price">£30 child</p>
+            <p class="description">Visit the historic fortress, home to the Crown Jewels and the Yeoman Warders.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="15" data-child="10">
+            <img src="Camden Market.png" alt="Camden Market Exploration" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>Camden Market Exploration</h3>
+            <p class="price">£15 adult</p><p class="price">£10 child</p>
+            <p class="description">Dive into the vibrant markets, street food, and alternative culture of Camden.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="20" data-child="15">
+            <img src="Hyde Park.png" alt="Hyde Park Walking Tour" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>Hyde Park Walking Tour</h3>
+            <p class="price">£20 adult</p><p class="price">£15 child</p>
+            <p class="description">Stroll through London's largest park, see the Serpentine, and enjoy outdoor activities.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="50" data-child="40">
+            <img src="West End.png" alt="West End Theatre Show" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>West End Theatre Show</h3>
+            <p class="price">£50 adult</p><p class="price">£40 child</p>
+            <p class="description">Experience world-class musicals and plays in the heart of London's theatre district.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="45" data-child="35">
+            <img src="Warner Bros.png" alt="Warner Bros. Studio Tour London" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>Warner Bros. Studio Tour London</h3>
+            <p class="price">£45 adult</p><p class="price">£35 child</p>
+            <p class="description">Step into the magical world of Harry Potter at the official studio tour.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="60" data-child="50">
+            <img src="Stonhenge & Bath.png" alt="Stonehenge and Bath Day Trip" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>Stonehenge and Bath Day Trip</h3>
+            <p class="price">£60 adult</p><p class="price">£50 child</p>
+            <p class="description">Journey to ancient Stonehenge and the Roman baths in Bath for a full day of history.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="25" data-child="20">
+            <img src="Oxford Street.png" alt="Oxford Street Shopping Experience" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>Oxford Street Shopping Experience</h3>
+            <p class="price">£25 adult</p><p class="price">£20 child</p>
+            <p class="description">Shop at the world's busiest shopping street with guided tips and discounts.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="30" data-child="20">
+            <img src="Globe Theatre.png" alt="Shakespeare's Globe Theatre Visit" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>Shakespeare's Globe Theatre Visit</h3>
+            <p class="price">£30 adult</p><p class="price">£20 child</p>
+            <p class="description">Tour the reconstructed Globe Theatre and learn about Elizabethan theatre.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="25" data-child="15">
+            <img src="Natural History Museum.png" alt="Natural History Museum Tour" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>Natural History Museum Tour</h3>
+            <p class="price">£25 adult</p><p class="price">£15 child</p>
+            <p class="description">Explore dinosaurs, human biology, and natural wonders at this iconic museum.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="20" data-child="15">
+            <img src="Tate Modern.png" alt="Tate Modern Gallery Visit" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>Tate Modern Gallery Visit</h3>
+            <p class="price">£20 adult</p><p class="price">£15 child</p>
+            <p class="description">Discover contemporary art in the former power station turned art gallery.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
+        <div class="trip" data-adult="18" data-child="12">
+            <img src="Portobello.png" alt="Portobello Road Market Tour" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+            <h3>Portobello Road Market Tour</h3>
+            <p class="price">£18 adult</p><p class="price">£12 child</p>
+            <p class="description">Wander through the famous antiques market in Notting Hill with expert guidance.</p>
+            <button class="book" onclick="bookTrip(this)">Book</button>
+        </div>
     </div>
 
-    <select id="adults">
-        <option>1 adult</option>
-        <option>2 adults</option>
-        <option>3 adults</option>
-    </select>
 
-    <select id="children">
-        <option>0 children</option>
-        <option>1 child</option>
-        <option>2 children</option>
-        <option>3 children</option>
-    </select>
 
-    <button onclick="searchTrips()">Search</button>
-</div>
 
-<h2 style="text-align:center; margin-top:20px;">Available Destinations</h2>
+    <div id="checkout">
+        <h2>Checkout</h2>
+        <p id="selectedTrip"></p>
+        <p id="adultPrice"></p>
+        <p id="childPrice"></p>
+        <p id="totalPrice"></p>
+        <input type="text" placeholder="Full Name"><br><br>
+        <input type="email" placeholder="Email"><br><br>
+        <button onclick="completeBooking()">Complete Booking</button>
+        <p id="finalMessage"></p>
+    </div>
+    <div id="scheduleBox">
+        <h2>Choose time and language</h2>
+        <p id="scheduleActivityName" style="font-weight:bold; margin-bottom:5px;"></p>
+        <p id="scheduleActivityNote" style="margin-bottom:15px; font-size:0.9em; color:#666;"></p>
+        <div style="margin:20px 0; text-align:left; max-width:320px; margin-left:auto; margin-right:auto;">
+            <label for="scheduleTime" style="font-weight:bold; display:block; margin-bottom:8px;">Time</label>
+            <select id="scheduleTime" style="width:100%; padding:10px; border-radius:5px; border:1px solid #ccc; margin-bottom:16px;"></select>
+            <label for="scheduleLanguage" style="font-weight:bold; display:block; margin-bottom:8px;">Language</label>
+            <select id="scheduleLanguage" style="width:100%; padding:10px; border-radius:5px; border:1px solid #ccc; margin-bottom:16px;">
+                <option>English</option>
+                <option>Español</option>
+                <option>Français</option>
+                <option>Deutsch</option>
+                <option>Italiano</option>
+            </select>
+        </div>
+        <button onclick="confirmSchedule()" style="background:#1e4d3a; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; font-weight:bold;">Continue</button>
+        <button onclick="closeSchedule()" style="margin-top:10px; background:#ccc; color:black; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Cancel</button>
+    </div>
+</section>
 
-<div class="container">
-<div class="trip" data-price="2200"><h3>Tokyo 🇯🇵</h3><p class="price">€2200 per adult</p><p class="price">€1100 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
-<div class="trip" data-price="1800"><h3>New York 🇺🇸</h3><p class="price">€1800 per adult</p><p class="price">€900 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
-<div class="trip" data-price="2600"><h3>Sydney 🇦🇺</h3><p class="price">€2600 per adult</p><p class="price">€1300 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
-<div class="trip" data-price="1500"><h3>Dubai 🇦🇪</h3><p class="price">€1500 per adult</p><p class="price">€750 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
-<div class="trip" data-price="950"><h3>Paris 🇫🇷</h3><p class="price">€950 per adult</p><p class="price">€475 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
-<div class="trip" data-price="1100"><h3>Rome 🇮🇹</h3><p class="price">€1100 per adult</p><p class="price">€550 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
-<div class="trip" data-price="2100"><h3>Singapore 🇸🇬</h3><p class="price">€2100 per adult</p><p class="price">€1050 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
-<div class="trip" data-price="1700"><h3>Los Angeles 🇺🇸</h3><p class="price">€1700 per adult</p><p class="price">€850 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
-<div class="trip" data-price="2000"><h3>Hong Kong 🇭🇰</h3><p class="price">€2000 per adult</p><p class="price">€1000 per children</p><button class="book" onclick="bookTrip(this)">Book</button></div>
-</div>
 
-<div id="checkout">
-    <h2>Checkout</h2>
-    <p id="selectedTrip"></p>
-    <p id="tripDetails"></p>
-    <p id="errorMsg"></p>
 
-    <input type="text" placeholder="Full Name"><br><br>
-    <input type="email" placeholder="Email"><br><br>
 
-    <button onclick="completeBooking()">Complete Booking</button>
-    <p id="finalMessage"></p>
-</div>
+<section id="team">
+    <h2>Meet the Team</h2>
+    <div class="team-member">
+        <strong>Álvaro Bricio Parra</strong> - Developer & Revision<br>
+        <em>Email:</em> a.bricio@n-hill.co.uk
+    </div>
+    <div class="team-member">
+        <strong>David Cantarero Martínez</strong> - Ideas<br>
+        <em>Email:</em> d.cantarero@n-hill.co.uk
+    </div>
+    <div class="team-member">
+        <strong>Alonso de la Iglesia Sánchez</strong> - Writer<br>
+        <em>Email:</em> a.iglesia@n-hill.co.uk
+    </div>
+    <div class="team-member">
+        <strong>David Rubio Gallego</strong> - Interviewer<br>
+        <em>Email:</em> d.rubio@n-hill.co.uk
+    </div>
+    <div class="team-member">
+        <strong>Daniel Solera Moreno</strong> - Interviewed<br>
+        <em>Email:</em> d.solera@n-hill.co.uk
+    </div>
+</section>
+
+
+
+
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p>✉️ Email: hello@n-hill.co.uk</p>
+    <p>📞 Phone: 0800 123 4567</p>
+    <p>📍 30 St Mary Axe (The Gherkin), London</p>
+</section>
+
+
+
 
 <div id="comingSoonBox">
-    <h2>🚧 Coming Soon</h2>
-    <p>Sign in is not available yet.</p>
-    <button onclick="closeComingSoon()">Close</button>
+    <h2>&#128274; Log In</h2>
+    <div style="margin:20px 0; text-align:center; max-width:320px; margin-left:auto; margin-right:auto; display:flex; flex-direction:column; align-items:center;">
+        <label for="signinUser" style="font-weight:bold; display:block; width:100%;">User</label>
+        <input id="signinUser" type="text" placeholder="User" style="width:85%; padding:10px; margin:8px auto 16px auto; border-radius:5px; border:1px solid #ccc; display:block;">
+        <label for="signinPassword" style="font-weight:bold; display:block; width:100%;">Password</label>
+        <input id="signinPassword" type="password" placeholder="Password" style="width:85%; padding:10px; margin:8px auto 16px auto; border-radius:5px; border:1px solid #ccc; display:block;">
+    </div>
+    <button onclick="checkCredentials()" style="background:#1e4d3a; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; font-weight:bold;">Log In</button>
+    <p id="signinMessage" style="margin-top:20px; color:#d4af37; font-weight:bold;"></p>
+    <button onclick="closeComingSoon()" style="margin-top:10px; background:#ccc; color:black; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Close</button>
 </div>
 
+
+
+
 <footer>
-    <p>📍 30 St Mary Axe (The Gherkin), London</p>
-    <p>📧 hello@n-hill.co.uk</p>
-    <p>📞 0800 123 4567</p>
-    <p>👨‍💻 Made by Alvaro Bricio</p>
+    <p>© 2026 Notting Hill Hopps. All rights reserved</p>
 </footer>
 
+
+
+
 <script>
+function showComingSoon() {
+    document.getElementById("signinUser").value = "";
+    document.getElementById("signinPassword").value = "";
+    document.getElementById("signinMessage").innerText = "";
+    document.getElementById("comingSoonBox").style.display = "block";
+}
+function closeComingSoon() {
+    document.getElementById("comingSoonBox").style.display = "none";
+}
+function checkCredentials() {
+    const user = document.getElementById("signinUser").value.trim();
+    const pass = document.getElementById("signinPassword").value.trim();
+    const message = document.getElementById("signinMessage");
+    if (user === "alvarobricio" && pass === "Owner3057") {
+        message.innerText = "Hello Developer! :D";
+    } else {
+        message.innerText = "You're not my owner 😎";
+    }
+}
+
+
+
+
+function showSection(sectionId) {
+    const sections = ['home','about','activities','team','contact'];
+    sections.forEach(id => {
+        document.getElementById(id).style.display = (id===sectionId)
+            ? (id === 'home' ? 'flex' : 'block')
+            : 'none';
+    });
+    document.getElementById("checkout").style.display = "none";
+}
+
+
+
+
 function bookTrip(button) {
     const tripDiv = button.parentElement;
-    const destination = tripDiv.querySelector('h3').innerText;
-    const adultPrice = parseFloat(tripDiv.dataset.price);
-    const childPrice = adultPrice / 2;
-
-    const start = document.getElementById("startDate").value;
-    const end = document.getElementById("endDate").value;
+    const activity = tripDiv.querySelector('h3').innerText;
+    const adultPriceVal = parseFloat(tripDiv.dataset.adult);
+    const childPriceVal = parseFloat(tripDiv.dataset.child);
     const adults = parseInt(document.getElementById("adults").value);
     const children = parseInt(document.getElementById("children").value);
 
-    const minDate = new Date("2026-04-01");
-    const maxDate = new Date("2028-12-31");
-    const startDate = new Date(start);
-    const endDate = new Date(end);
 
-    // Validar fechas
-    if (!start || !end) {
-        document.getElementById("errorMsg").innerText = "Please select both departure and return dates.";
-        document.getElementById("checkout").style.display = "none";
-        return;
+    const scheduleBox = document.getElementById("scheduleBox");
+    const scheduleActivityName = document.getElementById("scheduleActivityName");
+    const scheduleTime = document.getElementById("scheduleTime");
+    const scheduleLanguage = document.getElementById("scheduleLanguage");
+
+
+    scheduleActivityName.innerText = activity;
+    fillScheduleTimes(activity, scheduleTime);
+    fillLanguageOptions(activity, scheduleLanguage);
+   
+    const scheduleActivityNote = document.getElementById("scheduleActivityNote");
+    const activityKeyLower = activity.toLowerCase();
+    if (activityKeyLower.includes("west end")) {
+        scheduleActivityNote.innerText = "(English only)";
+    } else {
+        scheduleActivityNote.innerText = "";
     }
 
-    if (startDate < minDate || endDate < minDate || startDate > maxDate || endDate > maxDate) {
-        document.getElementById("errorMsg").innerText = "Error: Dates must be from April 2026 to December 2028.";
-        document.getElementById("checkout").style.display = "none";
-        return;
+
+    scheduleBox.dataset.activity = activity;
+    scheduleBox.dataset.adultPrice = adultPriceVal;
+    scheduleBox.dataset.childPrice = childPriceVal;
+    scheduleBox.dataset.adults = adults;
+    scheduleBox.dataset.children = children;
+
+
+    scheduleBox.style.display = "block";
+    scheduleTime.focus();
+}
+
+
+function fillLanguageOptions(activity, selectElement) {
+    const activityKey = activity.toLowerCase();
+    const allLanguages = ["English", "Español", "Français", "Deutsch", "Italiano"];
+   
+    selectElement.innerHTML = "";
+    let languages = allLanguages;
+    let disabled = false;
+
+
+    if (activityKey.includes("london eye")) {
+        languages = ["Language-free"];
+        disabled = true;
+    } else if (activityKey.includes("west end")) {
+        languages = ["English"];
+        disabled = true;
+    } else if (activityKey.includes("tate")) {
+        languages = ["Language-free"];
+        disabled = true;
     }
 
-    document.getElementById("errorMsg").innerText = "";
 
+    languages.forEach(lang => {
+        const option = document.createElement("option");
+        option.value = lang;
+        option.innerText = lang;
+        selectElement.appendChild(option);
+    });
+    selectElement.disabled = disabled;
+}
+
+
+function fillScheduleTimes(activity, selectElement) {
+    selectElement.innerHTML = "";
+    const activityKey = activity.toLowerCase();
+    let times = [];
+    let disabled = false;
+
+
+    if (activityKey.includes("london eye")) {
+        times = ["Time-free (any time)"];
+        disabled = true;
+    } else if (activityKey.includes("thames") || activityKey.includes("cruise")) {
+        times = ["10:00", "12:00", "14:00", "16:00", "18:00"];
+    } else if (activityKey.includes("british museum")) {
+        times = ["10:00", "13:00", "16:00"];
+    } else if (activityKey.includes("buckingham")) {
+        times = ["10:00", "13:00", "16:00"];
+    } else if (activityKey.includes("tower of london")) {
+        times = ["10:00", "14:00", "18:00"];
+    } else if (activityKey.includes("camden")) {
+        times = ["10:00", "13:00", "16:00"];
+    } else if (activityKey.includes("hyde")) {
+        times = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
+    } else if (activityKey.includes("warner") || activityKey.includes("potter")) {
+        times = ["10:00", "15:00"];
+    } else if (activityKey.includes("west end")) {
+        times = ["10:00", "13:00", "16:00"];
+    } else if (activityKey.includes("stonehenge") || activityKey.includes("bath")) {
+        times = ["11:00"];
+    } else if (activityKey.includes("globe")) {
+        times = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
+    } else if (activityKey.includes("natural history")) {
+        times = ["10:00", "14:00", "18:00"];
+    } else if (activityKey.includes("tate")) {
+        times = ["Time-free (any time)"];
+        disabled = true;
+    } else if (activityKey.includes("portobello")) {
+        times = ["10:00", "13:00", "16:00"];
+    } else {
+        times = ["10:00", "12:00", "14:00", "16:00", "18:00"];
+    }
+
+
+    times.forEach(time => {
+        const option = document.createElement("option");
+        option.value = time;
+        option.innerText = time;
+        selectElement.appendChild(option);
+    });
+    selectElement.disabled = disabled;
+}
+
+
+function generateRandomSchedule(count, startHour, endHour) {
+    const times = new Set();
+    const morningHours = [10, 11, 12];
+    const afternoonHours = [13, 14, 15, 16];
+    if (count === 2) {
+        const morningHour = morningHours[Math.floor(Math.random() * morningHours.length)];
+        const afternoonHour = afternoonHours[Math.floor(Math.random() * afternoonHours.length)];
+        times.add(`${morningHour.toString().padStart(2, '0')}:00`);
+        times.add(`${afternoonHour.toString().padStart(2, '0')}:00`);
+    } else {
+        while (times.size < count) {
+            const hour = startHour + Math.floor(Math.random() * (endHour - startHour));
+            const minute = Math.random() < 0.5 ? "00" : "30";
+            const value = `${hour.toString().padStart(2, '0')}:${minute}`;
+            times.add(value);
+        }
+    }
+    return Array.from(times).sort();
+}
+
+
+function confirmSchedule() {
+    const scheduleBox = document.getElementById("scheduleBox");
+    const activity = scheduleBox.dataset.activity;
+    const adultPriceVal = parseFloat(scheduleBox.dataset.adultPrice);
+    const childPriceVal = parseFloat(scheduleBox.dataset.childPrice);
+    const adults = parseInt(scheduleBox.dataset.adults);
+    const children = parseInt(scheduleBox.dataset.children);
+    const language = document.getElementById("scheduleLanguage").value;
+    const time = document.getElementById("scheduleTime").value;
+
+
+    scheduleBox.style.display = "none";
     document.getElementById("checkout").style.display = "block";
-    document.getElementById("selectedTrip").innerText = "Trip: " + destination;
-
-    document.getElementById("tripDetails").innerText =
-        `Dates: ${start} → ${end} | ${adults} adult(s) x €${adultPrice} = €${adults*adultPrice}, ${children} child(ren) x €${childPrice} = €${children*childPrice}`;
-
+    updateCheckout(adults, children, adultPriceVal, childPriceVal, activity, language, time);
     document.getElementById("checkout").scrollIntoView({behavior:"smooth"});
 }
 
+
+function closeSchedule() {
+    document.getElementById("scheduleBox").style.display = "none";
+}
+
+
+
+
+function updateCheckout(adults, children, adultPriceVal, childPriceVal, activity, language, time) {
+    document.getElementById("selectedTrip").innerText = "Activity: " + activity;
+    document.getElementById("adultPrice").innerText = `${adults} adult(s) (£${adultPriceVal})`;
+    document.getElementById("childPrice").innerText = `${children} child(ren) (£${childPriceVal})`;
+    document.getElementById("totalPrice").innerText = `Total: £${adults*adultPriceVal + children*childPriceVal} | Language: ${language} | Time: ${time}`;
+}
+
+
+
+
 function searchTrips() {
     const input = document.getElementById("searchInput").value.toLowerCase();
-    const trips = document.querySelectorAll(".container .trip");
-
+    const trips = document.querySelectorAll(".trip");
     trips.forEach(t => {
-        if (input === "" || t.innerText.toLowerCase().includes(input)) {
-            t.style.display = "block";
-        } else {
-            t.style.display = "none";
-        }
+        t.style.display = t.innerText.toLowerCase().includes(input) ? "block" : "none";
     });
 }
+
+
+
 
 function completeBooking() {
     const messages = [
         "It's not true, bro 😎",
         "Fake booking completed 😂",
-        "No money taken 💸",
         "You got baited 😏"
     ];
-    document.getElementById("finalMessage").innerText =
-        messages[Math.floor(Math.random()*messages.length)];
+    const randomIndex = Math.floor(Math.random()*messages.length);
+    document.getElementById("finalMessage").innerText = messages[randomIndex];
 }
-
-function showComingSoon() {
-    document.getElementById("comingSoonBox").style.display = "block";
-}
-
-function closeComingSoon() {
-    document.getElementById("comingSoonBox").style.display = "none";
+function closeCheckout() {
+    document.getElementById("checkout").style.display = "none";
 }
 </script>
+
+
+
 
 </body>
 </html>
