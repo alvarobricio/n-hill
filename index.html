@@ -41,6 +41,10 @@ header p {
 
 
 
+
+
+
+
 nav {
     background:#1e4d3a;
     display:flex;
@@ -75,12 +79,18 @@ section {
     margin-left:20px;
 }
 #home img {
-    flex:1 1 320px;
-    max-width:420px;
-    width:100%;
-    height:auto;
-    border-radius:10px;
+    flex: 1 1 400px;
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    /* Estas líneas mejoran la nitidez */
+    object-fit: cover; 
+    image-rendering: -webkit-optimize-contrast; 
 }
+
+
 @media (max-width:900px) {
     #home {
         flex-direction:column;
@@ -115,6 +125,10 @@ section {
     cursor: pointer;
     font-weight: bold;
 }
+
+
+
+
 
 
 
@@ -222,12 +236,20 @@ footer {
 
 
 
+
+
+
+
 <header>
     <button onclick="showComingSoon()">Log In</button>
     <img src="https://i.ibb.co/0Rn0Js5F/Logo.png" alt="Notting Hill Hopps Logo" style="width:350px; height:auto; margin-bottom:10px;">
     <h1>Notting Hill Hopps 🇬🇧</h1>
     <p>The best London activities guaranteed!</p>
 </header>
+
+
+
+
 
 
 
@@ -239,6 +261,10 @@ footer {
     <button onclick="showSection('team')">Meet our Team</button>
     <button onclick="showSection('contact')">Contact Us</button>
 </nav>
+
+
+
+
 
 
 
@@ -262,6 +288,10 @@ footer {
 
 
 
+
+
+
+
 <section id="about">
     <h2>About Us</h2>
     <p>We curate the finest experiences in London for tourists and locals alike. Our goal is to make every visit memorable and fun!</p>
@@ -269,7 +299,15 @@ footer {
 
 
 
+
+
+
+
     <hr style="margin:20px 0; border-color:#d4af37;">
+
+
+
+
 
 
 
@@ -286,7 +324,15 @@ footer {
 
 
 
+
+
+
+
     <hr style="margin:20px 0; border-color:#d4af37;">
+
+
+
+
 
 
 
@@ -302,7 +348,15 @@ footer {
 
 
 
+
+
+
+
     <hr style="margin:20px 0; border-color:#d4af37;">
+
+
+
+
 
 
 
@@ -316,6 +370,14 @@ footer {
         <p><strong>⭐⭐⭐⭐ Emma W.</strong> "Harry Potter Studio Tour exceeded expectations! A must-do for fans."</p>
     </div>
 </section>
+
+
+
+
+
+
+
+
 
 
 
@@ -339,6 +401,10 @@ footer {
         </select>
         <button onclick="searchTrips()">Search</button>
     </div>
+
+
+
+
 
 
 
@@ -456,6 +522,10 @@ footer {
 
 
 
+
+
+
+
     <div id="checkout">
         <h2>Checkout</h2>
         <p id="selectedTrip"></p>
@@ -491,6 +561,10 @@ footer {
 
 
 
+
+
+
+
 <section id="team">
     <h2>Meet the Team</h2>
     <div class="team-member">
@@ -518,12 +592,20 @@ footer {
 
 
 
+
+
+
+
 <section id="contact">
     <h2>Contact Us</h2>
     <p>✉️ Email: hello@n-hill.co.uk</p>
     <p>📞 Phone: 0800 123 4567</p>
     <p>📍 30 St Mary Axe (The Gherkin), London</p>
 </section>
+
+
+
+
 
 
 
@@ -544,9 +626,17 @@ footer {
 
 
 
+
+
+
+
 <footer>
     <p>© 2026 Notting Hill Hopps. All rights reserved</p>
 </footer>
+
+
+
+
 
 
 
@@ -575,6 +665,10 @@ function checkCredentials() {
 
 
 
+
+
+
+
 function showSection(sectionId) {
     const sections = ['home','about','activities','team','contact'];
     sections.forEach(id => {
@@ -588,6 +682,10 @@ function showSection(sectionId) {
 
 
 
+
+
+
+
 function bookTrip(button) {
     const tripDiv = button.parentElement;
     const activity = tripDiv.querySelector('h3').innerText;
@@ -595,6 +693,8 @@ function bookTrip(button) {
     const childPriceVal = parseFloat(tripDiv.dataset.child);
     const adults = parseInt(document.getElementById("adults").value);
     const children = parseInt(document.getElementById("children").value);
+
+
 
 
     const scheduleBox = document.getElementById("scheduleBox");
@@ -616,6 +716,8 @@ function bookTrip(button) {
     }
 
 
+
+
     scheduleBox.dataset.activity = activity;
     scheduleBox.dataset.adultPrice = adultPriceVal;
     scheduleBox.dataset.childPrice = childPriceVal;
@@ -623,9 +725,13 @@ function bookTrip(button) {
     scheduleBox.dataset.children = children;
 
 
+
+
     scheduleBox.style.display = "block";
     scheduleTime.focus();
 }
+
+
 
 
 function fillLanguageOptions(activity, selectElement) {
@@ -635,6 +741,8 @@ function fillLanguageOptions(activity, selectElement) {
     selectElement.innerHTML = "";
     let languages = allLanguages;
     let disabled = false;
+
+
 
 
     if (activityKey.includes("london eye")) {
@@ -649,6 +757,8 @@ function fillLanguageOptions(activity, selectElement) {
     }
 
 
+
+
     languages.forEach(lang => {
         const option = document.createElement("option");
         option.value = lang;
@@ -659,11 +769,15 @@ function fillLanguageOptions(activity, selectElement) {
 }
 
 
+
+
 function fillScheduleTimes(activity, selectElement) {
     selectElement.innerHTML = "";
     const activityKey = activity.toLowerCase();
     let times = [];
     let disabled = false;
+
+
 
 
     if (activityKey.includes("london eye")) {
@@ -676,7 +790,7 @@ function fillScheduleTimes(activity, selectElement) {
     } else if (activityKey.includes("buckingham")) {
         times = ["10:00", "13:00", "16:00"];
     } else if (activityKey.includes("tower of london")) {
-        times = ["10:00", "14:00", "18:00"];
+        times = ["11:00", "15:00"];
     } else if (activityKey.includes("camden")) {
         times = ["10:00", "13:00", "16:00"];
     } else if (activityKey.includes("hyde")) {
@@ -690,7 +804,7 @@ function fillScheduleTimes(activity, selectElement) {
     } else if (activityKey.includes("globe")) {
         times = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
     } else if (activityKey.includes("natural history")) {
-        times = ["10:00", "14:00", "18:00"];
+        times = ["11:00", "15:00"];
     } else if (activityKey.includes("tate")) {
         times = ["Time-free (any time)"];
         disabled = true;
@@ -701,6 +815,8 @@ function fillScheduleTimes(activity, selectElement) {
     }
 
 
+
+
     times.forEach(time => {
         const option = document.createElement("option");
         option.value = time;
@@ -709,6 +825,8 @@ function fillScheduleTimes(activity, selectElement) {
     });
     selectElement.disabled = disabled;
 }
+
+
 
 
 function generateRandomSchedule(count, startHour, endHour) {
@@ -732,6 +850,8 @@ function generateRandomSchedule(count, startHour, endHour) {
 }
 
 
+
+
 function confirmSchedule() {
     const scheduleBox = document.getElementById("scheduleBox");
     const activity = scheduleBox.dataset.activity;
@@ -743,6 +863,8 @@ function confirmSchedule() {
     const time = document.getElementById("scheduleTime").value;
 
 
+
+
     scheduleBox.style.display = "none";
     document.getElementById("checkout").style.display = "block";
     updateCheckout(adults, children, adultPriceVal, childPriceVal, activity, language, time);
@@ -750,9 +872,15 @@ function confirmSchedule() {
 }
 
 
+
+
 function closeSchedule() {
     document.getElementById("scheduleBox").style.display = "none";
 }
+
+
+
+
 
 
 
@@ -767,6 +895,10 @@ function updateCheckout(adults, children, adultPriceVal, childPriceVal, activity
 
 
 
+
+
+
+
 function searchTrips() {
     const input = document.getElementById("searchInput").value.toLowerCase();
     const trips = document.querySelectorAll(".trip");
@@ -774,6 +906,10 @@ function searchTrips() {
         t.style.display = t.innerText.toLowerCase().includes(input) ? "block" : "none";
     });
 }
+
+
+
+
 
 
 
@@ -791,6 +927,10 @@ function closeCheckout() {
     document.getElementById("checkout").style.display = "none";
 }
 </script>
+
+
+
+
 
 
 
