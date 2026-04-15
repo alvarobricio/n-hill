@@ -748,6 +748,7 @@ function fillScheduleTimes(activity, selectElement) {
         times = ["10:00", "13:00", "16:00"];
     } else if (activityKey.includes("stonehenge") || activityKey.includes("bath")) {
         times = ["11:00"];
+        disabled = true;
     } else if (activityKey.includes("globe")) {
         times = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
     } else if (activityKey.includes("natural history")) {
